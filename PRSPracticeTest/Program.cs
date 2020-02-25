@@ -7,7 +7,7 @@ namespace PRSPracticeTest {
         static void Main(string[] args) {
             var context = new PRSDbContext();
             //AddUser(context);
-            GetAllUsers(context);
+            //GetAllUsers(context);
 
         }
         static void AddUser(PRSDbContext context) {
