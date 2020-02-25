@@ -11,6 +11,7 @@ namespace PRSLibrary {
         public string Email { get; set; }
         public bool IsReviewer { get; set; }
         public bool IsAdmin { get; set; }
+
         public User() { }
     }
 }
