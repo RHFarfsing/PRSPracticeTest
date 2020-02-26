@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PRSLibrary.Models;
+using System;
+using System.Collections.Generic;
 
 namespace PRSLibrary {
     public class User {
@@ -11,7 +13,7 @@ namespace PRSLibrary {
         public string Email { get; set; }
         public bool IsReviewer { get; set; }
         public bool IsAdmin { get; set; }
-
+        public virtual List<Request> Requests { get; set; }
         public User() { }
     }
 }

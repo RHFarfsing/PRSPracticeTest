@@ -7,7 +7,7 @@ using PRSLibrary;
 
 namespace PRSLibrary.Migrations
 {
-    [DbContext(typeof(PRSDbContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class PRSDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

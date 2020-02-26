@@ -8,7 +8,7 @@ using PRSLibrary;
 
 namespace PRSLibrary.Migrations
 {
-    [DbContext(typeof(PRSDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20200225213049_redid clss and model")]
     partial class redidclssandmodel
     {

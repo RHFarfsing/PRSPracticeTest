@@ -11,6 +11,7 @@ namespace PRSLibrary.Models {
         public string Unit { get; set; }
         public int VendorId { get; set; }
         public virtual Vendor Vendor { get; set; }
+        public List<RequestLine> requestLines { get; set; }
         public Product() { }
     }
 }
