@@ -15,7 +15,8 @@ namespace PRSLibrary.Models {
         public virtual User User { get; set; }
         public List<RequestLine> requestLines { get; set; }
         public override string ToString() => $"{Id}|{Description}|{Justification}|{RejectionReason}|{DeliveryMode}|{Status}|{Total}|{UserId}";
-        }
         public Request() { }
     }
-}
+        
+ }
+
