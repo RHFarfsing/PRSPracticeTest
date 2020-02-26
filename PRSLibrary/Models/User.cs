@@ -14,6 +14,8 @@ namespace PRSLibrary {
         public bool IsReviewer { get; set; }
         public bool IsAdmin { get; set; }
         public virtual List<Request> Requests { get; set; }
+        public override string ToString() => $"{Id}|{Username}|{Password}|{Firstname}|{Lastname}|{Phone}|{Email}|{IsReviewer}|{IsAdmin}";
         public User() { }
+        
     }
 }

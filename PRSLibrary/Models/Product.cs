@@ -12,6 +12,7 @@ namespace PRSLibrary.Models {
         public int VendorId { get; set; }
         public virtual Vendor Vendor { get; set; }
         public List<RequestLine> requestLines { get; set; }
+        public override string ToString() => $"{Id}|{PartNbr}|{Name}|{Unit}|{VendorId}";
         public Product() { }
     }
 }

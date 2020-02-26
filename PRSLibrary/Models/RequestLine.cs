@@ -10,6 +10,9 @@ namespace PRSLibrary.Models {
         public int Quantity { get; set; }
         public virtual Product Product { get; set; }
         public virtual Request Request { get; set; }
+        public override string ToString() => $"{Id}|{RequestId}|{ProductId}|{Quantity}";
         public RequestLine() { }
     }
 }
+    
+
