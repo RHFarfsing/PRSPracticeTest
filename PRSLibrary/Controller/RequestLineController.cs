@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 
 namespace PRSLibrary.Controller {
-    public class RequestLinesController {
+    public class RequestLineController {
         private AppDbContext context = new AppDbContext();
         public IEnumerable<RequestLine> GetAllRequestLine() {
             return context.RequestLines.ToList();

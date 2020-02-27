@@ -52,5 +52,6 @@ namespace PRSLibrary.Controller {
             if (rowsAffected == 0) throw new Exception("Delete failed.");
             return true;
         }
+        }
     }
 }
