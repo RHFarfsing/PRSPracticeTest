@@ -10,6 +10,7 @@ namespace PRSLibrary {
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
+        public virtual DbSet<RequestLine> RequestLines { get; set; }
         public AppDbContext() { }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder builder) {
@@ -60,7 +61,7 @@ namespace PRSLibrary {
                 e.Property(x => x.RejectionReason).HasMaxLength(80);
                 e.Property(x => x.DeliveryMode).HasMaxLength(20).IsRequired().HasDefaultValue("Pickup");
                 e.Property(x => x.Status).HasMaxLength(10).IsRequired().HasDefaultValue("New");
-                e.Property(x => x.Total).HasColumnType("decimal(11,2)").IsRequired().HasDefaultValue(0);
+                e.Property(x => x.Total).HasColumnType("decimal(11,2)").HasDefaultValue(0);
                 e.HasOne(x => x.User).WithMany(x => x.Requests).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
             });
             model.Entity<RequestLine>(e => {

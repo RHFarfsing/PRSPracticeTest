@@ -1,16 +1,53 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace PRSLibrary.Controller {
-    class UserController {
-        private AppDbContext AppDbContext { get; set; }
-        static void GetAllUsers(AppDbContext context) {
-            var users = context.Users.ToList();
-            foreach (var u in users) {
-                Console.WriteLine(u);
+    public class UserController {
+        private AppDbContext context = new AppDbContext();
+        public IEnumerable<User> GetAllUser() {
+            return context.Users.ToList();
+        }
+        public User GetByUserPk(int id) {
+            if (id < 1) throw new Exception("Id must be greater than zero.");
+            return context.Users.Find(id);
+        }
+        public User InsertUser(User user) {
+            if(user == null) throw new Exception("User cannot be null in an insert.");
+            context.Users.Add(user);
+            try {
+                context.SaveChanges();
+            } catch(DbUpdateException ex) {
+                throw new Exception("Username must be unique", ex);                
+            }catch(Exception ex) {
+                throw;
             }
+            return user;            
+        }
+        public bool UpdateUser(int id, User user) {
+            if (user == null) throw new Exception("user cannot be null in an update.");
+            if (id != user.Id) throw new Exception("Id and User.Id must match.");
+            context.Entry(user).State = EntityState.Modified;
+            try {
+                context.SaveChanges();
+            } catch (DbUpdateException ex) {
+                throw new Exception("Username must be unique", ex);
+            } catch (Exception ex) {
+                throw;
+            }
+            return true;
+        }
+        public bool DeleteUser(int id) {
+            if (id <= 0) throw new Exception("Id must be greater than zero");
+            var user = context.Users.Find(id);
+            return DeleteUser(user);
+        }
+        public bool DeleteUser(User user) {
+            context.Users.Remove(user);
+            context.SaveChanges();
+            return true;
         }
     }
 }
