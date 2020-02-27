@@ -19,9 +19,10 @@ namespace PRSLibrary.Controller {
             if (product == null) throw new Exception("Product cannot be null in a insert.");
             context.Products.Add(product);
             try {
-                context.SaveChanges();
-            }catch(DbUpdateException ex) {
-                throw new Exception("PartNbr must be unique.");
+                var rowsAffected = context.SaveChanges();
+                if (rowsAffected == 0) throw new Exception("Insert failed.");
+            } catch (DbUpdateException ex) {
+                throw new Exception("PartNbr must be unique.",ex);
             }catch(Exception ex) {
                 throw;
             }
@@ -32,7 +33,8 @@ namespace PRSLibrary.Controller {
             if (id != product.Id) throw new Exception("Id and product.Id must match.");
             context.Entry(product).State = EntityState.Modified;
             try {
-                context.SaveChanges();
+                var rowsAffected = context.SaveChanges();
+                if (rowsAffected == 0) throw new Exception("Update failed.");
             } catch (DbUpdateException ex) {
                 throw new Exception("PartNbr must be unique.");
             } catch (Exception ex) {
@@ -47,7 +49,8 @@ namespace PRSLibrary.Controller {
         }
         public bool DeleteProduct(Product product) {
             context.Products.Remove(product);
-            context.SaveChanges();
+            var rowsAffected = context.SaveChanges();
+            if (rowsAffected == 0) throw new Exception("Delete failed.");
             return true;
         }
 

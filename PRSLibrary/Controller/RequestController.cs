@@ -17,12 +17,15 @@ namespace PRSLibrary.Controller {
         public Request InsertRequest(Request request) {
             if (request == null) throw new Exception("Request cannot be null in an insert");
             context.Requests.Add(request);
-            context.SaveChanges();
+            var rowsAffected = context.SaveChanges();
+            if (rowsAffected == 0) throw new Exception("Insert failed.");
             return request;
         }
         public bool UpdateRequest(int id, Request request) {
             if (request == null) throw new Exception("Request cannot be null in an update");
             if (id != request.Id) throw new Exception("Id and Request.Id must match");
+            var rowsAffected = context.SaveChanges();
+            if (rowsAffected == 0) throw new Exception("Update failed.");
             return true;
         }
         public bool DeleteRequest(int id) {
@@ -32,7 +35,8 @@ namespace PRSLibrary.Controller {
         }
         public bool DeleteRequest(Request request) {
             context.Requests.Remove(request);
-            context.SaveChanges();
+            var rowsAffected = context.SaveChanges();
+            if (rowsAffected == 0) throw new Exception("Delete failed.");
             return true;
         }
     }

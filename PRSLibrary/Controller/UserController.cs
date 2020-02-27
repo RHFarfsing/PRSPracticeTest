@@ -18,7 +18,8 @@ namespace PRSLibrary.Controller {
             if(user == null) throw new Exception("User cannot be null in an insert.");
             context.Users.Add(user);
             try {
-                context.SaveChanges();
+                var rowsAffected = context.SaveChanges();
+                if (rowsAffected == 0) throw new Exception("Insert failed.");
             } catch(DbUpdateException ex) {
                 throw new Exception("Username must be unique", ex);                
             }catch(Exception ex) {
@@ -31,7 +32,8 @@ namespace PRSLibrary.Controller {
             if (id != user.Id) throw new Exception("Id and User.Id must match.");
             context.Entry(user).State = EntityState.Modified;
             try {
-                context.SaveChanges();
+                var rowsAffected = context.SaveChanges();
+                if (rowsAffected == 0) throw new Exception("Update failed.");
             } catch (DbUpdateException ex) {
                 throw new Exception("Username must be unique", ex);
             } catch (Exception ex) {
@@ -46,7 +48,8 @@ namespace PRSLibrary.Controller {
         }
         public bool DeleteUser(User user) {
             context.Users.Remove(user);
-            context.SaveChanges();
+            var rowsAffected = context.SaveChanges();
+            if (rowsAffected == 0) throw new Exception("Delete failed.");
             return true;
         }
     }
