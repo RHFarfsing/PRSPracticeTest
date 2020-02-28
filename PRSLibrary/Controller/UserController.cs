@@ -6,7 +6,10 @@ using System.Text;
 
 namespace PRSLibrary.Controller {
     public class UserController {
-        private AppDbContext context = new AppDbContext();
+        private readonly AppDbContext context = new AppDbContext();
+        public User Login(string username, string password) {
+            return context.Users.SingleOrDefault(u => u.Username == username && u.Password == password);
+        }
         public IEnumerable<User> GetAllUser() {
             return context.Users.ToList();
         }
@@ -52,6 +55,6 @@ namespace PRSLibrary.Controller {
             if (rowsAffected == 0) throw new Exception("Delete failed.");
             return true;
         }
-        }
     }
 }
+

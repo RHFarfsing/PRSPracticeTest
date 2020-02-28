@@ -6,7 +6,31 @@ using System.Text;
 
 namespace PRSLibrary.Controller {
     public class RequestController {
-        private AppDbContext context = new AppDbContext();
+        private readonly AppDbContext context = new AppDbContext();
+        public const string StatusNew = "NEW";
+        public const string StatusEdit = "EDIT";
+        public const string StatusReview = "REVIEW";
+        public const string StatusApproved = "APPROVED";
+        public const string StatusRejected = "REJECTED";
+        public IEnumerable<Request> GetRequestsToReviewNotOwn(int userId) {
+            return context.Requests.Where(x => x.UserId != userId && x.Status == StatusReview).ToList();
+        }
+        public bool SetToReview(Request request) {
+            if(request.Total <= 50) {
+                request.Status = StatusApproved;
+            }else {
+            request.Status = StatusReview;
+            }
+            return UpdateRequest(request.Id, request);
+        }
+        public bool SetToAppoved(Request request) {
+            request.Status = StatusApproved;
+            return UpdateRequest(request.Id, request);
+        }
+        public bool SetToRejected(Request request) {
+            request.Status = StatusRejected;
+            return UpdateRequest(request.Id, request);
+        }
         public IEnumerable<Request> GetAllRequest() {
             return context.Requests.ToList();
         }
