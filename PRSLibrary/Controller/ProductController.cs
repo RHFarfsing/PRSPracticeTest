@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PRSLibrary.Controller {
     public class ProductController {
-        private AppDbContext context = new AppDbContext();
+        private readonly AppDbContext context = new AppDbContext();
         public IEnumerable<Product> GetAllProducts() {
             return context.Products.ToList();
         }

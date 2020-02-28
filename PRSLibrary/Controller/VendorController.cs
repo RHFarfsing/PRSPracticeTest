@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PRSLibrary.Controller {
     public class VendorController {
-        private AppDbContext context = new AppDbContext();
+        private readonly AppDbContext context = new AppDbContext();
         public IEnumerable<Vendor> GetAllVendors() {
             return context.Vendors.ToList();
         }
